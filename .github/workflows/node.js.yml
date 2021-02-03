@@ -30,8 +30,6 @@ jobs:
     - run: npm test
 name: Deploy
 
-on: [push]
-
 jobs:
   deploy:
     name: Deploy my app
