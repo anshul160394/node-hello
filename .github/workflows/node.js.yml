@@ -9,8 +9,7 @@ on:
   pull_request:
     branches: [ master ]
 
-jobs:
-  build:
+jobs: Build & Deploy
 
     runs-on: ubuntu-latest
 
@@ -28,19 +27,11 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-jobs:
-  deploy:
-    name: Deploy my app
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v1
-
-      - uses: chrnorm/deployment-action@releases/v1
-        name: Create GitHub deployment
-        id: deployment
-        with:
-          token: "${{ github.token }}"
-          target_url: https://sap-demo.cfapps.eu10.hana.ondemand.com/
-          environment: production
+    - uses: actions/checkout@v1
+    - uses: chrnorm/deployment-action@releases/v1
+    - name: Create GitHub deployment
+      id: deployment
+      with:
+        token: "${{ github.token }}"
+        target_url: https://sap-demo.cfapps.eu10.hana.ondemand.com/
+        environment: production
